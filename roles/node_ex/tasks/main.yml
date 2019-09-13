@@ -1,0 +1,31 @@
+---
+# tasks file for node_ex
+
+- name: Download Node_exporter
+  copy:
+       src: node_exporter-0.18.1.linux-amd64
+       dest: /tmp
+
+- name: Copy file ..
+  copy:
+       src: node_exporter-0.18.1.linux-amd64/node_exporter
+       dest: /usr/local/bin
+
+- name: Add user ..
+  user:
+       name: node_exporter
+  
+- name: Create unit ..
+  copy:
+       src: node_exporter.service
+       dest: /etc/systemd/system/node_exporter.service
+
+- name: Daemon reload ..
+  shell: systemctl daemon-reload
+
+
+- name: Restart service ..
+  service:
+      name: node_exporter
+      state: started
+      enabled: yes

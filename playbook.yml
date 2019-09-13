@@ -1,0 +1,10 @@
+---
+- name: Node_exporter
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  become_user: root
+  roles:
+     - { role: metricbeat }
+#     - { role: node_ex }
+

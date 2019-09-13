@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-web
+  labels:
+    role: java-role
+spec:
+  containers:
+    - name: rideshair
+      image: 07062018/java_rp001:java001
+      ports:
+        - name: node-exporter
+          containerPort: 9100
+          protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-exporter
+  labels:
+    service: node-exporter
+spec:
+  type: NodePort
+  selector:
+    component: node_exporter
+  ports:
+  - port: 9100
+    targetPort: 9100
